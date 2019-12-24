@@ -1,0 +1,14 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+	<h1>Are you sure you want to delete ?</h1>
+	<p>{{ post.title }}</p>
+
+	<form method="POST" action="">
+		{% csrf_token %}
+
+		<button class="btn btn-danger" type="submit">Yes, delete</button>
+	</form>
+
+{% endblock %}

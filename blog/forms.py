@@ -11,6 +11,10 @@ class PostForm(forms.ModelForm):
 		title = self.cleaned_data.get('title')
 		post = Post.objects.filter(title__iexact=title)
 
+		instance = self.instance
+		if instance is not None:
+			post = post.exclude(pk=instance.pk)
+
 		if post.exists():
 			raise forms.ValidationError('This title has already been used. Please try again.')
 
