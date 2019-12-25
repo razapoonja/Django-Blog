@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 
+from searches.views import search
 from .views import ( contact )
 
 urlpatterns = [
     path('blog/', include('blog.urls')),
     path('contact/', contact),
+    path('search/', search),
     path('admin/', admin.site.urls),
 ]
 

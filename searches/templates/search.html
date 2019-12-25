@@ -1,0 +1,25 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+	{% if query %}
+
+		You searched for {{ query }}
+
+		{% for post in posts %}
+			{% if post.image %}
+				<img src="{{ post.image.url }}">
+			{% endif %}
+
+			<p>{{ post.publish_date }}</p>
+			<h3>
+				<a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+			</h3>
+			<p>{{ post.content|linebreaks|truncatewords:30 }}</p>
+			{% if  not post.publish_date %} Draft {% endif %}
+			<hr>
+		{% endfor %}
+
+	{% endif %}	
+
+{% endblock %}
