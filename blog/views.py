@@ -6,7 +6,12 @@ from .forms import PostForm
 
 
 def post_list(request):
-	posts = Post.objects.all()
+	posts = Post.objects.published()
+
+	if request.user.is_authenticated:
+		user_posts = Post.objects.filter(user=request.user)
+		posts = (posts | user_posts).distinct()
+
 	context = {'posts': posts}
 
 	return render(request, 'post/list.html', context)
@@ -21,7 +26,7 @@ def post_detail(request, slug):
 
 @staff_member_required
 def post_create(request):
-	form = PostForm(request.POST or None)
+	form = PostForm(request.POST or None, request.FILES or None)
 
 	if form.is_valid():
 		post = form.save(commit=False)

@@ -1,2 +1,13 @@
-<h1>{{ post.title }}</h1>
-<p>{{ post.content }}</p>
+{% extends 'master.html' %}
+
+{% block content %}
+
+	<h1>{{ post.title }}</h1>
+	<p>{{ post.content }}</p>
+
+	{% if request.user.is_staff %}
+		<a href="{{ post.get_edit_url }}">Edit</a>
+		<a href="{{ post.get_delete_url }}">Delete</a>
+	{% endif %}
+
+{% endblock %}

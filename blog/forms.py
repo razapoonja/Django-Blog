@@ -5,7 +5,7 @@ from .models import Post
 class PostForm(forms.ModelForm):
 	class Meta:
 		model = Post
-		fields = ['title', 'slug', 'content']
+		fields = ['title', 'image', 'slug', 'content', 'publish_date']
 
 	def clean_title(self, *args, **kwargs):
 		title = self.cleaned_data.get('title')
